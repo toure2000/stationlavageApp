@@ -1,0 +1,15 @@
+@if(this.isopen()){
+<div style="position: fixed;top:0px;right: 0px;bottom: 0px;left: 0px;background-color: #555;opacity: 0.5;" (click)="GlobaleS.fermerconfirmation(false)"></div>
+<div class="divmodif" *ngIf="GlobaleS.haveconfirmation" style="background-color: #FFF;z-index: 9999;">
+  <h2 mat-dialog-title>Confirmation</h2>
+  <div style="margin-bottom: 25px;overflow-y: auto;" >
+     {{GlobaleS.textconfirmation}}
+  </div>
+  <div style="height: 20px;display: grid;margin-right: 5px;">
+   <div style="justify-self: end; width: 200px;height: 100%;">
+    <button  style="width: 45%;padding: 2.5px;border-radius: 5px;background-color: #585757;color: #FFF;font-weight: 700;"  (click)="GlobaleS.fermerconfirmation(false)">No</button>
+    <button  style="width: 45%;padding: 2.5px;border-radius: 5px;margin-left: 10%;background-color: #7d7c7c;color: #FFF;font-weight: 700;"  (click)="GlobaleS.fermerconfirmation(true)">Ok</button>
+  </div>
+  </div>
+</div>
+}

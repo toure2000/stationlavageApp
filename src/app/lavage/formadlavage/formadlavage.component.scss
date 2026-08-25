@@ -1,0 +1,31 @@
+
+mat-grid-tile{
+
+}
+.donnee-obligatoire,.donnee-non-obligatoire,.donnee-personnes{
+  width: 100%;
+  height: 100%;
+  padding: 7%;
+  display: grid;
+  grid-template-columns: 1;
+}
+.typelavage,.typevoiture,.list-materiel,.list-service,.clients,.ouvriers{
+  justify-self: center;
+  display: flex;
+  width: 100%;
+  max-width: 400px;
+  margin-top: 10px;
+  height: 80px;
+
+}
+
+.btnnew{
+  justify-self: center;
+  background-color: rgb(35, 67, 95);
+  color: #FFF;
+  text-align: center;
+  border-radius: 5px;
+  max-width: 300px;
+  width: 100%;
+}
+

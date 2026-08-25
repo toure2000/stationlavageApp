@@ -1,0 +1,108 @@
+<h3 style="text-align: center;box-shadow: 0px 0px 10px #000;padding: 1%;">Ajouter Lavage</h3>
+<form style="min-height: 300px;" [formGroup]="this.FormadTypeLavageS.form" (ngSubmit)="this.FormadTypeLavageS.submitType_lavageForm()">
+  <mat-tab-group #tabgroup>
+    <mat-tab label="Données">
+
+      <mat-grid-list #gridliste cols="2" rowHeight="200px" style="padding: 10px;">
+        <mat-grid-tile>
+
+          <div class="premiere-donnee">
+            <div class="type" style="justify-self: end;">
+              <h4 style="width: 20%;;padding-right: 10px;">
+                <img src="/assets/icones/description.jpg"
+                  style="width: 100%;max-width: 60px;;height: 100%;background-size: cover;" />
+              </h4>
+              <mat-form-field style="width: 80%;" class="example-full-width">
+                <mat-label>Type</mat-label>
+                <input type="text" (focus)="this.inittypeAutoCompletOption()" matInput formControlName="type"
+                  [matAutocomplete]="typeauto">
+                <mat-autocomplete #typeauto="matAutocomplete" [displayWith]="displayFn">
+                  @for (option of typefilteredOptions | async; track option) {
+                  <mat-option [value]="option">{{option}}</mat-option>
+                  }
+                </mat-autocomplete>
+              </mat-form-field>
+            </div>
+
+            <div class="description" style="justify-self: end;">
+              <h4 style="width: 20%;;padding-right: 10px;">
+                <img src="/assets/icones/description.jpg"
+                  style="width: 100%;max-width: 60px;;height: 100%;background-size: cover;" />
+              </h4>
+              <mat-form-field style="width: 80%;" class="example-full-width">
+                <mat-label>Description</mat-label>
+                <textarea matInput placeholder="Ex. It makes me feel..." formControlName="description"></textarea>
+              </mat-form-field>
+            </div>
+          </div>
+
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+          <div class="deuxieme-donnee">
+            <div class="picture" style="justify-self: start;">
+              <h4 style="width: 30%;"></h4>
+              <div style="display: flex;border: 2px dotted black;">
+                <input #voitureinputfile type="file" style="width:0px ;height: 0px;">
+                <img #voitureimagefile src="\assets\icones\picture.jpg"
+                  style="width: 100%;min-width: 100px;;height: 100%;background-size: cover;" />
+              </div>
+            </div>
+
+            <div class="dimenssions" style="justify-self: start;">
+              <div style="display: flex;width: 70%;margin-left: 12%;">
+                <div style="width: 50%;padding: 2%;">
+                  <mat-form-field style="width: 80%;" class="example-full-width">
+                    <mat-label>prix</mat-label>
+                    <input type="text" (focus)="this.initprixAutoCompletOption()" matInput formControlName="prix"
+                      [matAutocomplete]="prixauto">
+                    <mat-autocomplete #prixauto="matAutocomplete" [displayWith]="displayFn">
+                      @for (option of prixfilteredOptions | async; track option) {
+                      <mat-option [value]="option">{{option}}</mat-option>
+                      }
+                    </mat-autocomplete>
+                  </mat-form-field>
+                </div>
+                <div style="width: 50%;padding: 2%;">
+                  <mat-form-field style="width: 80%;" class="example-full-width">
+                    <mat-label>duree</mat-label>
+                    <input type="text" (focus)="this.initdureeAutoCompletOption()" matInput formControlName="duree"
+                      [matAutocomplete]="dureeauto">
+                    <mat-autocomplete #dureeauto="matAutocomplete" [displayWith]="displayFn">
+                      @for (option of dureefilteredOptions | async; track option) {
+                      <mat-option [value]="option">{{option}}</mat-option>
+                      }
+                    </mat-autocomplete>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+          </div>
+        </mat-grid-tile>
+      </mat-grid-list>
+      <div style="width: 100%;display: grid;">
+        <span type="submit" style="justify-self: center;" class="btnnew" (click)="suivant()">Suivant</span>
+      </div>
+    </mat-tab>
+    <mat-tab label="Voitures">
+      <mat-grid-list cols="1" rowHeight="200px" style="padding: 10px;">
+        <mat-grid-tile>
+          <div style="display: flex;flex-direction: column;">
+            <div class="list-voiture">
+              <h4 style="width: 30%;">List voiture</h4>
+              <mat-form-field>
+                <mat-label>Toppings</mat-label>
+                <mat-select  #matselect formControlName="list_type_voiture" multiple>
+                  @for (topping of this.toppingList | async; track topping) {
+                  <mat-option [value]="topping" >{{topping.marque}}</mat-option>
+                  }
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <button type="submit" class="btnnew">Enregistrer</button>
+          </div>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </mat-tab>
+  </mat-tab-group>
+</form>

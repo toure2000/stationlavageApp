@@ -1,0 +1,43 @@
+ <!--notification-->
+ <div #bell class="boxElem icon" id="bell" style="margin-right: 0px;height: 80%;margin-top: 13%;" >
+   <i class="fa fa-bell-o boxElem" style="font-size: 200%;" aria-hidden="true"></i>
+  <div class="boxElem badge" style="padding-top: 0px;" *ngIf="conns.userIsConnecter()">
+    <b style="position: absolute;transform: translate(-5px,-20px);">{{ChateS.getCountListeMessageNonVue(conns.getCurrentUser().id)}}</b>
+  </div>
+ </div>
+ <div #box class="boxElem notifications" id="box" style="z-index: 999;transform: translateX(100px);" >
+     <h2 class="boxElem">Notifications - <span>{{ChateS.getCountListeMessageNonVue(conns.getCurrentUser().id)}}</span></h2>
+     <div class="boxElem" style="max-height: 300px;overflow-y: auto;">
+      <div class="boxElem" *ngFor="let message of getListMessageObject()">
+
+        <div class="boxElem" *ngIf="message.user&&message.user.id!=conns.getCurrentUser().id&&message.type!='MESSAGE_RENDEVOUS'" class="notifications-item">
+           <img class="boxElem" id="{{message.id}}" *ngIf="message.user" src="{{conns.GlobaleS.getimageRemplaceNonCharger(message.id,UtilisateurS.normaliseImage(message.user).picture)}}" alt="img">
+           <img class="boxElem" *ngIf="!message.user" src="https://img.icons8.com/flat_round/64/000000/vote-badge.png" alt="img">
+           <div style="width: 80%;" class="boxElem" class="text" *ngIf="message.listIdTo[0]==conns.getCurrentUser().id">
+              <h4 class="boxElem" *ngIf="message.user">{{message.user.nom }} {{message.user.prenom }}</h4>
+              <h4 class="boxElem" *ngIf="!message.user">user </h4>
+              <p  class="boxElem" style="word-wrap: break-word;width: 98%;max-height: 60px;margin-bottom: 3px;"> {{message.message.substring(0,70)}} {{message.message.length>70?'...':''}}</p>
+           </div>
+        </div>
+
+
+        <div class="boxElem" *ngIf="message.user&&message.user.id!=conns.getCurrentUser().id&&message.type=='MESSAGE_RENDEVOUS'" class="notifications-item">
+          <img class="boxElem" id="{{message.id}}" *ngIf="message.user" src="{{conns.GlobaleS.getimageRemplaceNonCharger(message.id,UtilisateurS.normaliseImage(message.user).picture)}}" alt="img">
+          <img class="boxElem" *ngIf="!message.user" src="https://img.icons8.com/flat_round/64/000000/vote-badge.png" alt="img">
+          <div style="width: 80%;" class="boxElem" class="text" *ngIf="message.listIdTo[0]==conns.getCurrentUser().id">
+            <h4 class="boxElem" style="font-weight: 900;" *ngIf="message.user">{{message.user.nom }} {{message.user.prenom }}:RDV</h4>
+            <h4 class="boxElem" style="font-weight: 900;" *ngIf="!message.user">user :RDV</h4>
+          </div>
+       </div>
+
+       </div>
+     </div>
+
+     <!--<div class="notifications-item"> <img src="https://img.icons8.com/flat_round/64/000000/vote-badge.png" alt="img">
+         <div class="text">
+             <h4>John Silvester</h4>
+             <p>+20 vista badge earned</p>
+         </div>
+     </div>-->
+ </div>
+<!-- fin notification-->

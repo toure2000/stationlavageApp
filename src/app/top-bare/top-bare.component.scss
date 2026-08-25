@@ -1,0 +1,150 @@
+.nav {
+  position: fixed;
+  left: 0px;
+  right: 0px;
+  height: 50px;
+  background-color: rgb(35, 67, 95);
+  color: #FFF;
+  font-weight: 500;
+  z-index: 99999;
+  display: flex;
+}
+
+.right,
+.left,
+.milieu {
+  padding: 5px;
+  padding-bottom: 0px;
+  padding-top: 10px;
+  height: 100%;
+}
+
+.right {
+  text-align: right;
+  padding-right: 15px;
+}
+
+.milieu {
+  text-align: center;
+  padding-top: 10px;
+}
+
+.left {
+  text-align: left;
+  padding-left: 25px;
+}
+
+i {
+  font-size: 200%;
+  margin-left: 15px;margin-right: 15px;
+}
+
+i:hover {
+  color: #cbcdcb;
+  text-shadow: 0px 0px 1px #FFF;
+}
+
+.sidbar {
+  position: fixed;
+  top: 50px;
+  left: 0px;
+  bottom: 0px;
+  width: 200px;
+  background-color: #FFF;
+  z-index: 9999;
+  padding-top: 10px;
+  box-shadow: 10px 0px 10px rgb(207, 223, 237);
+  overflow: hidden;
+  width: 50px;
+  transition-duration: 0.5s;
+  transition-property: width;
+}
+.divprofile{
+  position: absolute;
+  width: 300px;
+  min-height: 100px;
+  border-radius: 5px;
+  background-color: rgb(245, 248, 248);
+  right: 35px;
+  top: 45px;
+}
+.parentinfoprofile{
+  width: 90%;
+  margin: 5%;
+  min-height: 50px;
+  padding-top: 0.5%;
+  padding-bottom: 0.5%;
+  box-shadow: 0px 0px 10px #555;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.infoprofile{
+  width: 98%;
+  margin: 1%;
+  height: 50px;
+  border-radius: 5px;
+  display: flex;
+}
+.actionsprofile{
+  width: 90%;
+  margin-left: 5%;
+  border-radius: 5px;
+  min-height: 30px;
+  margin-bottom: 5px;
+  display: flex;
+  cursor: pointer;
+}
+.infoprofile:hover,.lienprofile:hover,.actionsprofile:hover{
+  background-color: #d8d9db;
+}
+.lienprofile{
+  width: 98%;
+  margin-left: 1%;
+  height: 30px;
+  border-radius: 5px;
+}
+
+app-notification{
+  position: absolute;right: 100px;height: 100%;top: 0px;;
+}
+@media only screen and (max-width: 400px) {
+  .sidbar {
+    width: 0px;
+  }
+  app-notification{
+    right: 55px;
+  }
+}
+.sidbarelement {
+  width: 100%;
+  min-width: 50px;
+  height: 50px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  display: flex;
+  cursor: pointer;
+}
+
+.sidbarelement:hover {
+  //border-radius: 0px 20px 20px 0px;
+  background: #EEE;
+}
+
+.sidbartext {
+  padding: 5px;
+  padding-top: 10px;
+  font-weight: 600;
+}
+
+.sidbardivimage {
+  width: 50px;
+  height: 100%;
+  padding: 2px;
+  padding-left: 8px;
+}
+
+.sidbarimage {
+  height: 36px;
+  width: 36px;
+  background-size: cover;
+}

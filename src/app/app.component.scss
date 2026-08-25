@@ -1,0 +1,17 @@
+.conteneur {
+  position: fixed;
+  padding-top: 20px;
+  padding-left: 65px;
+  overflow-y: auto;
+  top: 50px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  box-shadow: 0px 0px 10px #000 inset;
+}
+
+@media only screen and (max-width: 400px) {
+  .conteneur {
+    padding-left: 0px;
+  }
+}

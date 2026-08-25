@@ -1,0 +1,212 @@
+
+@if(userisadmin&&this.editIsopen()){
+<div style="position: fixed;top:0px;right: 0px;bottom: 0px;left: 0px;background-color: #555;opacity: 0.5;z-index: 9;">
+</div>
+<div class="divmodif">
+  <div class="list-lavage-element" *ngIf="FormadlavageS.Lavage">
+
+    <div class="voiture-div" >
+
+     <div style="display: flex;">
+
+      <div class="image-left">
+          <div style="height: 50%;width: 100%;display: grid;">
+             <img *ngIf="FormadlavageS.Lavage.client" [src]="getImageUser(FormadlavageS.Lavage.client)" style="width: 30px;height: 25px;border-radius: 100%;margin-left: 5%;justify-self: center;background-size: cover;" />
+          </div>
+          <div style="height: 50%;width: 100%;">
+            <b *ngIf="FormadlavageS.Lavage.client" style="font-size: 60%;color: #FFF;">
+              {{FormadlavageS.Lavage.client.nom.toUpperCase()[0]+"."+FormadlavageS.Lavage.client.prenom.substring(0,4)+"..."}}
+            </b>
+          </div>
+      </div>
+
+      <div  class="image-voiture"
+      style="width: 100px;height: 50px;background-size: cover;background-position: center;"
+      [style]="getImageVoiture(FormadlavageS.Lavage)">
+      <div class="nom-voiture"
+        style="font-weight: 900;width: 30px;color: rgb(237, 239, 255);text-shadow: 0px 0px 20px rgb(80, 1, 1);font-size: 60%;transform: translate(35px,15px);">
+        {{(FormadlavageS.Lavage.typeVoiture.marque||'marque').toUpperCase()}}</div>
+      </div>
+
+      <div class="image-right" >
+        <div style="height: 50%;width: 100%;display: grid;">
+          <img *ngIf="FormadlavageS.Lavage.list_ouvrier[0]" [src]="getImageUser(FormadlavageS.Lavage.list_ouvrier[0])" style="width: 30px;height: 25px;border-radius: 100%;margin-left: 5%;justify-self: center;background-size: cover;" />
+       </div>
+       <div style="height: 50%;width: 100%;">
+         <b *ngIf="FormadlavageS.Lavage.list_ouvrier[0]" style="font-size: 60%;color: #FFF;">
+           {{FormadlavageS.Lavage.list_ouvrier[0].nom.toUpperCase()[0]+"."+FormadlavageS.Lavage.list_ouvrier[0].prenom.substring(0,4)+"..."}}
+         </b>
+       </div>
+      </div>
+
+     </div>
+
+      <div class="progression-voiture"><mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
+      </div>
+    </div>
+
+
+  </div>
+  <b style="text-align: center;display: block;margin-bottom: 10px;color: #ffffff;" [style]="'background-color:'+coloretat+';'"><span >{{getEtat(FormadlavageS.Lavage)}}</span></b>
+  <i *ngIf="this.isEnregistrerByUser()" (click)="FormadlavageS.initFormModif(FormadlavageS.Lavage);" class="fa fa-edit"
+    style="font-size: 200%;margin-right: 15px;color: #083595;background-color: #89a7e7;"></i>
+
+  <button *ngIf="this.formIsinitiale&&islavageEnattente(FormadlavageS.Lavage)"
+    (click)="this.commencerLavage(FormadlavageS.Lavage)" mat-button
+    style="margin-right: 30px;color: aliceblue;background-color: rgb(8, 122, 48);font-size: 80%;">Commencer</button>
+  <button #nonformIsinitiale *ngIf="!this.formIsinitiale&&islavageEnattente(FormadlavageS.Lavage)"
+    (click)="this.terminer()" mat-button
+    style="margin-right: 30px;color: aliceblue;background-color: rgb(8, 122, 48);font-size: 80%;">Terminer</button>
+
+  <button *ngIf="islavagefini(FormadlavageS.Lavage)" (click)="remettreEncoureLavage(FormadlavageS.Lavage)"
+    mat-button mat-dialog-close
+    style="margin-right: 30px;color: aliceblue;background-color: rgb(122, 8, 122);font-size: 80%;">non fini ?</button>
+  <button *ngIf="islavageEncoure(FormadlavageS.Lavage)" (click)="finirLavage(FormadlavageS.Lavage)" mat-button
+    mat-dialog-close
+    style="margin-right: 30px;color: aliceblue;background-color: rgb(8, 25, 122);font-size: 80%;">finir</button>
+  <button *ngIf="islavageEncoure(FormadlavageS.Lavage)" (click)="retirerLavage(FormadlavageS.Lavage)" mat-button
+    mat-dialog-close
+    style="margin-right: 30px;color: aliceblue;background-color: rgb(122, 8, 74);font-size: 80%;">retirer</button>
+
+  <button (click)="removeLavage(FormadlavageS.Lavage)" mat-button mat-dialog-close
+    style="margin-right: 30px;color: aliceblue;background-color: rgb(122, 8, 8);">Suprimer</button>
+  <br>
+  <div style="display: grid;"><button style="max-width: 200px;padding: 3px;height: 25px;border-radius: 5px;background-color: #555;color: aliceblue;font-weight: 800;margin-right: 10px;justify-self: end;" (click)="fermer()" class="cancel">Cancel</button></div>
+
+</div>
+}
+
+@if(userisclient&&this.editIsopen()){
+<div style="position: fixed;top:0px;right: 0px;bottom: 0px;left: 0px;background-color: #555;opacity: 0.5;z-index: 9;">
+</div>
+<div class="divmodif">
+  <div class="list-lavage-element" *ngIf="FormadlavageS.Lavage">
+
+    <div class="voiture-div" >
+
+     <div style="display: flex;">
+
+      <div class="image-left">
+          <div style="height: 50%;width: 100%;display: grid;">
+             <img *ngIf="FormadlavageS.Lavage.client" [src]="getImageUser(FormadlavageS.Lavage.client)" style="width: 30px;height: 25px;border-radius: 100%;margin-left: 5%;justify-self: center;background-size: cover;" />
+          </div>
+          <div style="height: 50%;width: 100%;">
+            <b *ngIf="FormadlavageS.Lavage.client" style="font-size: 60%;color: #FFF;">
+              {{FormadlavageS.Lavage.client.nom.toUpperCase()[0]+"."+FormadlavageS.Lavage.client.prenom.substring(0,4)+"..."}}
+            </b>
+          </div>
+      </div>
+
+      <div  class="image-voiture"
+      style="width: 100px;height: 50px;background-size: cover;background-position: center;"
+      [style]="getImageVoiture(FormadlavageS.Lavage)">
+      <div class="nom-voiture"
+        style="font-weight: 900;width: 30px;color: rgb(237, 239, 255);text-shadow: 0px 0px 20px rgb(80, 1, 1);font-size: 60%;transform: translate(35px,15px);">
+        {{(FormadlavageS.Lavage.typeVoiture.marque||'marque').toUpperCase()}}</div>
+      </div>
+
+      <div class="image-right" >
+        <div style="height: 50%;width: 100%;display: grid;">
+          <img *ngIf="FormadlavageS.Lavage.list_ouvrier[0]" [src]="getImageUser(FormadlavageS.Lavage.list_ouvrier[0])" style="width: 30px;height: 25px;border-radius: 100%;margin-left: 5%;justify-self: center;background-size: cover;" />
+       </div>
+       <div style="height: 50%;width: 100%;">
+         <b *ngIf="FormadlavageS.Lavage.list_ouvrier[0]" style="font-size: 60%;color: #FFF;">
+           {{FormadlavageS.Lavage.list_ouvrier[0].nom.toUpperCase()[0]+"."+FormadlavageS.Lavage.list_ouvrier[0].prenom.substring(0,4)+"..."}}
+         </b>
+       </div>
+      </div>
+
+     </div>
+
+      <div class="progression-voiture"><mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
+      </div>
+    </div>
+
+
+  </div>
+  <i *ngIf="this.isEnregistrerByUser()&&islavageEnattente(FormadlavageS.Lavage)"
+    (click)="FormadlavageS.initFormModif(FormadlavageS.Lavage);" class="fa fa-edit"
+    style="font-size: 200%;margin-right: 15px;color: #083595;background-color: #89a7e7;"></i>
+  <button *ngIf="this.isforclient()&&islavageEnattente(FormadlavageS.Lavage)"
+    (click)="removeLavage(FormadlavageS.Lavage)" mat-button mat-dialog-close
+    style="margin-right: 30px;color: aliceblue;background-color: rgb(122, 8, 8);">Suprimer</button>
+    <br>
+  <div style="display: grid;"><button style="max-width: 200px;padding: 3px;height: 25px;border-radius: 5px;background-color: #555;color: aliceblue;font-weight: 800;margin-right: 10px;justify-self: end;" (click)="fermer()" class="cancel">Cancel</button></div>
+</div>
+
+}
+
+@if(userisouvrier&&this.editIsopen()){
+<div style="position: fixed;top:0px;right: 0px;bottom: 0px;left: 0px;background-color: #555;opacity: 0.5;z-index: 9;">
+</div>
+<div class="divmodif">
+  <div class="list-lavage-element" *ngIf="FormadlavageS.Lavage">
+
+    <div class="voiture-div" >
+
+     <div style="display: flex;">
+
+      <div class="image-left">
+          <div style="height: 50%;width: 100%;display: grid;">
+             <img *ngIf="FormadlavageS.Lavage.client" [src]="getImageUser(FormadlavageS.Lavage.client)" style="width: 30px;height: 25px;border-radius: 100%;margin-left: 5%;justify-self: center;background-size: cover;" />
+          </div>
+          <div style="height: 50%;width: 100%;">
+            <b *ngIf="FormadlavageS.Lavage.client" style="font-size: 60%;color: #FFF;">
+              {{FormadlavageS.Lavage.client.nom.toUpperCase()[0]+"."+FormadlavageS.Lavage.client.prenom.substring(0,4)+"..."}}
+            </b>
+          </div>
+      </div>
+
+      <div  class="image-voiture"
+      style="width: 100px;height: 50px;background-size: cover;background-position: center;"
+      [style]="getImageVoiture(FormadlavageS.Lavage)">
+      <div class="nom-voiture"
+        style="font-weight: 900;width: 30px;color: rgb(237, 239, 255);text-shadow: 0px 0px 20px rgb(80, 1, 1);font-size: 60%;transform: translate(35px,15px);">
+        {{(FormadlavageS.Lavage.typeVoiture.marque||'marque').toUpperCase()}}</div>
+      </div>
+
+      <div class="image-right" >
+        <div style="height: 50%;width: 100%;display: grid;">
+          <img *ngIf="FormadlavageS.Lavage.list_ouvrier[0]" [src]="getImageUser(FormadlavageS.Lavage.list_ouvrier[0])" style="width: 30px;height: 25px;border-radius: 100%;margin-left: 5%;justify-self: center;background-size: cover;" />
+       </div>
+       <div style="height: 50%;width: 100%;">
+         <b *ngIf="FormadlavageS.Lavage.list_ouvrier[0]" style="font-size: 60%;color: #FFF;">
+           {{FormadlavageS.Lavage.list_ouvrier[0].nom.toUpperCase()[0]+"."+FormadlavageS.Lavage.list_ouvrier[0].prenom.substring(0,4)+"..."}}
+         </b>
+       </div>
+      </div>
+
+     </div>
+
+      <div class="progression-voiture"><mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
+      </div>
+    </div>
+
+
+  </div>
+  <i *ngIf="this.isEnregistrerByUser()&&islavageEnattente(FormadlavageS.Lavage)"
+    (click)="FormadlavageS.initFormModif(FormadlavageS.Lavage);" class="fa fa-edit"
+    style="font-size: 200%;margin-right: 15px;color: #083595;background-color: #89a7e7;"></i>
+  <button *ngIf="this.formIsinitiale&&islavageEnattente(FormadlavageS.Lavage)"
+    (click)="this.commencerLavage(FormadlavageS.Lavage)" mat-button
+    style="margin-right: 30px;color: aliceblue;background-color: rgb(8, 122, 48);font-size: 80%;">Commencer</button>
+  <button #nonformIsinitiale *ngIf="!this.formIsinitiale&&islavageEnattente(FormadlavageS.Lavage)"
+    (click)="this.terminer()" mat-button
+    style="margin-right: 30px;color: aliceblue;background-color: rgb(8, 122, 48);font-size: 80%;">Terminer</button>
+
+  <button *ngIf="islavagefini(FormadlavageS.Lavage)" (click)="remettreEncoureLavage(FormadlavageS.Lavage)"
+    mat-button mat-dialog-close
+    style="margin-right: 30px;color: aliceblue;background-color: rgb(122, 8, 122);font-size: 80%;">non fini ?</button>
+  <button *ngIf="islavageEncoure(FormadlavageS.Lavage)" (click)="finirLavage(FormadlavageS.Lavage)" mat-button
+    mat-dialog-close
+    style="margin-right: 30px;color: aliceblue;background-color: rgb(8, 25, 122);font-size: 80%;">finir</button>
+  <button *ngIf="islavageEncoure(FormadlavageS.Lavage)" (click)="retirerLavage(FormadlavageS.Lavage)" mat-button
+    mat-dialog-close
+    style="margin-right: 30px;color: aliceblue;background-color: rgb(122, 8, 74);font-size: 80%;">retirer</button>
+
+  <button (click)="removeLavage(FormadlavageS.Lavage)" mat-button mat-dialog-close
+    style="margin-right: 30px;color: aliceblue;background-color: rgb(122, 8, 8);">Suprimer</button>
+    <br>
+   <div style="display: grid;"><button style="max-width: 200px;padding: 3px;height: 25px;border-radius: 5px;background-color: #555;color: aliceblue;font-weight: 800;margin-right: 10px;justify-self: end;" (click)="fermer()" class="cancel">Cancel</button></div>
+</div>
+}

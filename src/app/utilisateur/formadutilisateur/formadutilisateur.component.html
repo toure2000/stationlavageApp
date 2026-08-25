@@ -1,0 +1,80 @@
+<div class="divparent">
+  <div class="appointment" >
+
+    <form class="form" [formGroup]="this.FormadUtilisateurS.form"
+      (ngSubmit)="this.FormadUtilisateurS.submitUtilisateurForm()">
+      <h3 style="color: rgb(24, 24, 95);padding: 0px;margin: 0px;margin-bottom: 10px;">Ajouter un utilisateur</h3>
+      <div class="form-group">
+        <h4 for="exampleInputid">
+          <img src="/assets/icones/id.svg" style="width: 100%;max-width: 60px;;height: 100%;background-size: cover;" />
+        </h4>
+        <mat-form-field class="example-full-width">
+          <mat-label>id</mat-label>
+          <input matInput formControlName="id" />
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <h4 for="exampleInputid">
+          <img src="/assets/icones/nom.png" style="width: 100%;max-width: 60px;;height: 100%;background-size: cover;" />
+        </h4>
+        <mat-form-field class="example-full-width">
+          <mat-label>nom</mat-label>
+          <input matInput type="text" formControlName="name" />
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <h4 for="exampleInputid">
+          <img src="/assets/icones/nom.png" style="width: 100%;max-width: 60px;;height: 100%;background-size: cover;" />
+        </h4>
+        <mat-form-field class="example-full-width">
+          <mat-label>Prenom</mat-label>
+          <input matInput type="text" formControlName="lastname" />
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <h4 for="exampleInputid">
+          <img src="/assets/icones/email.png"
+            style="width: 100%;max-width: 60px;;height: 100%;background-size: cover;" />
+        </h4>
+        <mat-form-field class="example-full-width">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" formControlName="email" />
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <h4 for="exampleInputid">
+          <img src="/assets/icones/password.png"
+            style="width: 100%;max-width: 60px;;height: 100%;background-size: cover;" />
+        </h4>
+        <mat-form-field class="example-full-width">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" formControlName="password" />
+        </mat-form-field>
+      </div>
+      <div *ngIf="FormadUtilisateurS.file"
+        style="height:105px;width:100%;margin-top: 5px;margin-bottom: 10px;display: grid;background-color: #d9dfea;">
+        <img [src]="FormadUtilisateurS.url" id="exampleInputImg"
+          style="width:100px;height:100px;background-size:cover;border-radius: 100px;background-position: center;border: 2px dotted black;justify-self: center;">
+      </div>
+      <div class="form-group">
+        <h4 for="exampleInputid" style="height: 100%;">
+          <img src="/assets/icones/picture_icone.png"
+            style="width: 100%;max-width: 60px;;height: 100%;background-size: cover;margin-top: 2px;" />
+        </h4>
+        <input style="margin-top: 20px;height: 100%;" (change)="FormadUtilisateurS.filechange($event)" type="file"
+          accept="img/*" class="form-control" id="exampleInputfile" aria-describedby="id" placeholder="Enter id">
+      </div>
+      <div class="form-group">
+        <h4 for="exampleInputid">
+          <img src="/assets/icones/role.jpeg"
+            style="width: 100%;max-width: 60px;;height: 100%;background-size: cover;" />
+        </h4>
+        <select formControlName="role" class="col text-center"
+          style="background-color: #063828;color: #d9dfea;height: 20px;width: 100%;margin-top: 20px;">
+          <option value="{{role}}" *ngFor="let role of connS.listRolePossible">{{role}} </option>
+        </select>
+      </div>
+      <div  style="display: grid;">
+        <button style="margin-top: 15px;" class="btnnew" type="submit">Submit</button>
+      </div>
+    </form>

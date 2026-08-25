@@ -1,0 +1,18 @@
+@if(userisadmin){
+  <div style="margin-left: 5%;padding-bottom: 5%;padding-top: 0px;width: 90%;">
+    <app-formadtype-lavage />
+    <app-listtype-lavage />
+  </div>
+}
+
+@if(userisclient){
+  <div style="margin-left: 5%;padding-bottom: 5%;padding-top: 0px;width: 90%;">
+    <app-listtype-lavage />
+  </div>
+}
+
+@if(userisouvrier){
+  <div style="margin-left: 5%;padding-bottom: 5%;padding-top: 0px;width: 90%;">
+    <app-listtype-lavage />
+  </div>
+}

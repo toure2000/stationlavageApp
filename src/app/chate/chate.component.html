@@ -1,0 +1,76 @@
+@if(isopen()&&conns.userIsConnecter()&&!isandroid()){
+
+<!-- partial:index.partial.html -->
+<div class="center" style="z-index: 99999;">
+
+
+  <app-listeuserchate />
+
+
+  <div class="chat">
+    <div class="contact bar">
+      <img class="pic stark" [src]="chateS.getUserTo().picture" />
+      <div class="name">
+        {{chateS.getUserTo().nom}}
+      </div>
+      <div class="seen">
+        Today at 12:56
+      </div>
+    </div>
+
+    <div #divelistechate style="max-height: 90%;overflow-y: auto;">
+      <app-listchate  />
+    </div>
+
+    <div class="input">
+      <div (click)="desc()" *ngIf="!isenbas"
+        style="width: 100px;background-color: black;color: aliceblue;border-radius: 5px;position: absolute;transform: translate(120px,-55px);">
+        descendre
+      </div>
+      <i class="fa fa-camera"></i>
+      <i class="far fa-laugh-beam"></i>
+      <input [formControl]="this.chateS.message" (keydown)="this.keyentreevent($event)"
+        (keyup)="sendMessageEncoureDeChateTo()" id="message" placeholder="Type your message here!" type="text" />
+      <i class="fa fa-microphone"></i>
+    </div>
+  </div>
+</div>
+
+
+}
+
+
+@if(isopen()&&conns.userIsConnecter()&&isandroid()){
+
+<!-- partial:index.partial.html -->
+
+<div class="chat" style="z-index: 99999;">
+  <div class="contact bar">
+    <img class="pic stark" [src]="chateS.getUserTo().picture" />
+    <div class="name">
+      {{chateS.getUserTo().nom}}
+    </div>
+    <div class="seen">
+      Today at 12:56
+    </div>
+  </div>
+
+
+  <div #divelistechate style="max-height: 90%;overflow-y: auto;">
+    <app-listchate  />
+  </div>
+
+  <div class="input">
+    <div (click)="desc() " *ngIf="!isenbas"
+      style="width: 100px;background-color: black;color: aliceblue;border-radius: 5px;position: absolute;transform: translate(120px,-55px);">
+      descendre
+    </div>
+    <i class="fa fa-camera"></i>
+    <i class="far fa-laugh-beam"></i>
+    <input [formControl]="this.chateS.message" (keydown)="this.keyentreevent($event)"
+      (keyup)="sendMessageEncoureDeChateTo()" id="message" placeholder="Type your message here!" type="text" />
+    <i class="fa fa-microphone"></i>
+  </div>
+</div>
+
+}

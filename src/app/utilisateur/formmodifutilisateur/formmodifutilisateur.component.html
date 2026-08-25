@@ -1,0 +1,89 @@
+<div style="position: fixed;top:0px;right: 0px;bottom: 0px;left: 0px;background-color: #555;opacity: 0.5;z-index: 9;">
+</div>
+<div class="divmodif">
+  <h3 style="text-align: center;box-shadow: 0px 0px 10px #000;padding: 1%;width: 90%;margin-left: 5%;">Modifier user</h3>
+  <mat-dialog-content class="mat-typography" style="display: grid;overflow-y: auto;">
+   <form [formGroup]="this.FormadUtilisateurS.formModif"
+      (ngSubmit)="this.FormadUtilisateurS.submitUtilisateurFormForModif()">
+      <div class="form-group">
+        <h4 for="exampleInputid">
+          <img src="/assets/icones/id.svg" style="width: 100%;max-width: 60px;;height: 100%;background-size: cover;" />
+        </h4>
+        <mat-form-field class="example-full-width">
+          <mat-label>id</mat-label>
+          <input matInput formControlName="id" />
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <h4 for="exampleInputid">
+          <img src="/assets/icones/nom.png" style="width: 100%;max-width: 60px;;height: 100%;background-size: cover;" />
+        </h4>
+        <mat-form-field class="example-full-width">
+          <mat-label>nom</mat-label>
+          <input matInput type="text" formControlName="name" />
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <h4 for="exampleInputid">
+          <img src="/assets/icones/nom.png" style="width: 100%;max-width: 60px;;height: 100%;background-size: cover;" />
+        </h4>
+        <mat-form-field class="example-full-width">
+          <mat-label>Prenom</mat-label>
+          <input matInput type="text" formControlName="lastname" />
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <h4 for="exampleInputid">
+          <img src="/assets/icones/email.png"
+            style="width: 100%;max-width: 60px;;height: 100%;background-size: cover;" />
+        </h4>
+        <mat-form-field class="example-full-width">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" formControlName="email" />
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <h4 for="exampleInputid">
+          <img src="/assets/icones/password.png"
+            style="width: 100%;max-width: 60px;;height: 100%;background-size: cover;" />
+        </h4>
+        <mat-form-field class="example-full-width">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" formControlName="password" />
+        </mat-form-field>
+      </div>
+      <div
+        style="height:105px;width:100%;margin-top: 5px;margin-bottom: 10px;display: grid;background-color: #d9dfea;">
+        <img #profileimage [src]="FormadUtilisateurS.url"  id="exampleInputImg"
+          style="width:100px;height:100px;background-size:cover;border-radius: 100px;background-position: center;border: 2px dotted black;justify-self: center;"/>
+      </div>
+      <div class="form-group">
+        <h4 for="exampleInputid" style="transform: translateY(50%);">
+          <img src="/assets/icones/picture_icone.png"
+            style="width: 100%;max-width: 60px;;height: 100%;background-size: cover;" />
+        </h4>
+        <input style="margin-top: 20px;"  (change)="FormadUtilisateurS.filechange($event)" type="file" accept="img/*"
+          class="form-control" id="exampleInputfile" aria-describedby="id" placeholder="Enter id">
+      </div>
+      <div class="form-group">
+        <h4 for="exampleInputid" style="transform: translateY(50%);">
+          <img src="/assets/icones/role.jpeg"
+            style="width: 100%;max-width: 60px;;height: 100%;background-size: cover;" />
+        </h4>
+        <select formControlName="role" class="col text-center"
+          style="background-color: #063828;color: #d9dfea;height: 20px;width: 100%;margin-top: 20px;">
+          <option [selected]="role==this.FormadUtilisateurS.user.role" value="{{role}}"
+            *ngFor="let role of connS.listRolePossible">{{role}} </option>
+        </select>
+      </div>
+      <div  style="display: grid;">
+        <button class="btnnew" style="margin-top: 25px;"  type="submit" >Submit</button>
+      </div>
+    </form>
+
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+  </mat-dialog-actions>
+</div>
+<!--fin form modification-->

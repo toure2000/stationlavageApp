@@ -1,0 +1,183 @@
+@if(conns.userisAdmin()){
+  <div style="width: 100%;" >
+    <h2 style="text-align: center;"> GESTION DE LAVAGE</h2>
+
+   <div style="display: grid;">
+    <div style="display: inline-block;height: 50px;display: flex;justify-self: center;">
+      <img [src]="conns.GlobaleS.normaliseImage(conns.getCurrentUser().picture)" style="width: 50px;height: 100%;border-radius: 50px;background-size: cover;">
+      <div style="height: 100%;width:200px;">
+          <div style="margin-left: 10px;transform: translateY(10%);">
+            <div style="font-size: 70%;font-weight: 900;">{{conns.getCurrentUser().role}}</div>
+            <div style="font-size: 60%;max-width: 100%;">{{conns.getCurrentUser().nom}} {{conns.getCurrentUser().nom}}</div>
+          </div>
+      </div>
+    </div>
+   </div>
+
+
+    <div style="
+      width: 90%;
+      padding: 5%;
+      padding-top: 5%;
+      display: grid;
+    ">
+      <div class="conteneur">
+
+        <div class="element" (click)="route.navigateByUrl('LavageComponent')">
+          <div class="elementdiv">
+            <img src="/assets/icones/lavage.png" />
+            <div class="description">
+              <h4>Lavage</h4>
+            </div>
+          </div>
+        </div>
+
+        <div class="element" (click)="route.navigateByUrl('TypeVoitureComponent')">
+          <div class="elementdiv">
+            <img src="/assets/icones/marque.png" />
+            <div class="description">
+              <h4>type voiture</h4>
+            </div>
+          </div>
+        </div>
+
+        <div class="element" (click)="route.navigateByUrl('TypeLavageComponent')">
+          <div class="elementdiv">
+            <img src="/assets/icones/type_lavage.png"  style="background-color: aliceblue;"/>
+            <div class="description">
+              <h4>type lavage</h4>
+           </div>
+          </div>
+        </div>
+
+        <div class="element" (click)="route.navigateByUrl('UtilisateurComponent')">
+          <div class="elementdiv">
+            <img src="/assets/icones/users.png" />
+            <div class="description">
+              <h4>Utilisateurs</h4>
+           </div>
+          </div>
+        </div>
+
+        <div class="element">
+          <div class="elementdiv">
+            <img src="/assets/icones/parametre.png" />
+            <div class="description">
+              <h4>Parametre</h4>
+           </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  }
+
+
+
+
+  @if(conns.userisClient()){
+    <div style="width: 100%;" >
+      <h2 style="text-align: center;">GESTION DE LAVAGE</h2>
+
+      <div style="display: grid;">
+        <div style="display: inline-block;height: 50px;display: flex;justify-self: center;">
+          <img [src]="conns.GlobaleS.normaliseImage(conns.getCurrentUser().picture)" style="width: 50px;height: 100%;border-radius: 50px;background-size: cover;">
+          <div style="height: 100%;width:200px;">
+              <div style="margin-left: 10px;transform: translateY(10%);">
+                <div style="font-size: 70%;font-weight: 900;">{{conns.getCurrentUser().role}}</div>
+                <div style="font-size: 60%;max-width: 100%;">{{conns.getCurrentUser().nom}} {{conns.getCurrentUser().nom}}</div>
+              </div>
+          </div>
+        </div>
+       </div>
+
+      <div style="
+        width: 90%;
+        padding: 5%;
+        padding-top: 5%;
+        display: grid;
+      ">
+        <div class="conteneur">
+
+          <div class="element" (click)="route.navigateByUrl('LavageComponent')">
+            <div class="elementdiv">
+              <img src="/assets/icones/lavage.png" />
+              <div class="description">
+                <h4>Lavage</h4>
+              </div>
+            </div>
+          </div>
+
+          <div class="element" (click)="route.navigateByUrl('TypeLavageComponent')">
+            <div class="elementdiv">
+              <img src="/assets/icones/type_lavage.png"  style="background-color: aliceblue;"/>
+              <div class="description">
+                <h4>type lavage</h4>
+             </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+
+    </div>
+
+    }
+
+
+
+
+    @if(conns.userisOuvrier()){
+      <div style="width: 100%;" >
+        <h2 style="text-align: center;">GESTION DE LAVAGE</h2>
+
+        <div style="display: grid;">
+          <div style="display: inline-block;height: 50px;display: flex;justify-self: center;">
+            <img [src]="conns.GlobaleS.normaliseImage(conns.getCurrentUser().picture)" style="width: 50px;height: 100%;border-radius: 50px;background-size: cover;">
+            <div style="height: 100%;width:200px;">
+                <div style="margin-left: 10px;transform: translateY(10%);">
+                  <div style="font-size: 70%;font-weight: 900;">{{conns.getCurrentUser().role}}</div>
+                  <div style="font-size: 60%;max-width: 100%;">{{conns.getCurrentUser().nom}} {{conns.getCurrentUser().nom}}</div>
+                </div>
+            </div>
+          </div>
+         </div>
+
+        <div style="
+          width: 90%;
+          padding: 5%;
+          padding-top: 5%;
+          display: grid;
+        ">
+          <div class="conteneur">
+
+            <div class="element" (click)="route.navigateByUrl('LavageComponent')">
+              <div class="elementdiv">
+                <img src="/assets/icones/lavage.png" />
+                <div class="description">
+                  <h4>Lavage</h4>
+                </div>
+              </div>
+            </div>
+
+            <div class="element" (click)="route.navigateByUrl('TypeLavageComponent')">
+              <div class="elementdiv">
+                <img src="/assets/icones/type_lavage.png"  style="background-color: aliceblue;"/>
+                <div class="description">
+                  <h4>type lavage</h4>
+               </div>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+
+      </div>
+
+      }
+

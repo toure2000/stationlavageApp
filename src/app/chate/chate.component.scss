@@ -1,0 +1,155 @@
+
+
+
+@import url('https://fonts.googleapis.com/css?family=Red+Hat+Display:400,500,900&display=swap');
+
+$text-1: #333;
+$text-2: #666;
+$text-3: #999;
+$line: #CCC;
+$time-bg: #EEE;
+$background: #F7F7F7;
+
+
+body, html {
+	font-family: Red hat Display, sans-serif;
+	font-weight: 400;
+	line-height: 1.25em;
+	letter-spacing: 0.025em;
+	color: $text-1;
+	//background: $background;
+}
+
+.center {
+	position: absolute;
+	top: 50%;
+	left: calc(50% + 12rem);
+	transform: translate(-50%, -50%);
+}
+
+.pic {
+	width: 4rem;
+	height: 4rem;
+	background-size: cover;
+	background-position: center;
+	border-radius: 50%;
+}
+
+
+
+
+
+.chat {
+	position: relative;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+
+	width: 24rem;
+	height: 38rem;
+	z-index: 2;
+	box-sizing: border-box;
+	border-radius: 1rem;
+
+	background: white;
+  background-color: $background;
+
+	box-shadow:
+		0 0 8rem 0 rgba(black, 0.1),
+		0rem 2rem 4rem -3rem rgba(black, 0.5);
+
+	.contact.bar {
+		flex-basis: 3.5rem;
+		flex-shrink: 0;
+		margin: 1rem;
+		box-sizing: border-box;
+	}
+
+
+  .contact {
+    position: relative;
+    margin-bottom: 1rem;
+    padding-left: 5rem;
+    height: 4.5rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .pic {
+      position: absolute;
+      left: 0;
+    }
+
+    .name {
+      font-weight: 500;
+      margin-bottom: 0.125rem;
+    }
+
+    .message, .seen {
+      font-size: 0.9rem;
+      color: $text-3;
+    }
+
+
+  }
+
+	.input {
+		box-sizing: border-box;
+		flex-basis: 4rem;
+		flex-shrink: 0;
+		display: flex;
+		align-items: center;
+		padding: 0 0.5rem 0 1.5rem;
+
+		i {
+			font-size: 1.5rem;
+			margin-right: 1rem;
+			color: $text-2;
+			cursor: pointer;
+			transition: color 200ms;
+
+			&:hover {
+				color: $text-1;
+			}
+		}
+
+		input {
+			border:none;
+			background-image:none;
+			background-color: white;
+			padding: 0.5rem 1rem;
+			margin-right: 1rem;
+			border-radius: 1.125rem;
+			flex-grow: 2;
+			box-shadow:
+				0 0 1rem rgba(black, 0.1),
+				0rem 1rem 1rem -1rem rgba(black, 0.2);
+
+			font-family: Red hat Display, sans-serif;
+			font-weight: 400;
+			letter-spacing: 0.025em;
+
+			&:placeholder {
+				color: $text-3;
+			}
+		}
+	}
+}
+
+@media only screen and (max-width: 400px) {
+  .chat{
+    position: absolute;
+    top: 0px;
+    height: 100%;
+    width: 100%;
+    border-radius: 0px;
+   }
+}
+
+
+// Obviously in a real app I would load this from a DB with JS
+// For now this is a nice quick and easy method to mockup
+
+.pic.stark { background-image: url('https://vignette.wikia.nocookie.net/marvelcinematicuniverse/images/7/73/SMH_Mentor_6.png')}

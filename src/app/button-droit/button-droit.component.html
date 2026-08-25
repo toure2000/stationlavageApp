@@ -1,0 +1,9 @@
+
+<ul #profeatures class="pro-features" style="z-index: 999999;">
+    <a #probutton (click)="probuttononclick()" class="get-pro" >Action</a>
+    <div class="button">
+        <a *ngIf="conns.userIsConnecter()" (click)="this.route.navigateByUrl(conns.getAccueilleUrl())" target="_blank" class="btn">Administrer</a>
+        <a #appchatebutton (click)="chatebuttononclick()" id="appchatebutton" class="btn">Chater</a>
+    </div>
+</ul>
+

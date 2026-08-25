@@ -1,0 +1,20 @@
+<div class="contacts" >
+  <i class="fa fa-bars fa-2x"></i>
+  <h2>
+    Contacts
+  </h2>
+  <div style="height: 85%;overflow-y: auto;scrollbar-width: none;">
+    <div *ngFor="let user of this.chateS.getListUser()" class="contact" (click)="userClickEvent(user)">
+      <img class="pic rogers" [src]="user.picture" />
+      <div class="badge" *ngIf="(getcountNonvueOrVide(conns.getCurrentUser().id,user.id))">
+        {{getcountNonvueOrVide(conns.getCurrentUser().id,user.id)}}
+      </div>
+      <div class="name">
+        {{user.nom}}
+      </div>
+      <div class="message">
+        That is America's ass 🇺🇸🍑
+      </div>
+    </div>
+  </div>
+</div>

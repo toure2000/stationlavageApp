@@ -1,0 +1,120 @@
+<div style="position: fixed;top:0px;right: 0px;bottom: 0px;left: 0px;background-color: #555;opacity: 0.5;z-index: 9;" ></div>
+<div class="divmodif">
+<mat-dialog-content class="mat-typography" >
+<!--form modification-->
+<form style="padding: 2.5%;display: grid;" [formGroup]="this.FormadtypeVoitureS.formModif" (ngSubmit)="this.FormadtypeVoitureS.submitType_voitureFormForModif()">
+  <h3 style="text-align: center;box-shadow: 0px 0px 10px #000;padding: 1%;">Ajouter un type de voiture</h3>
+   <mat-grid-list #gridliste cols="2" rowHeight="200px" style="padding: 10px;">
+     <mat-grid-tile>
+
+       <div class="premiere-donnee">
+         <div class="marque">
+           <h4 style="width: 20%;padding-right: 10px;">
+             <img  src="\assets\icones\marque.png"
+             style="width: 100%;max-width: 60px;;height: 100%;background-size: cover;" />
+           </h4>
+           <mat-form-field style="width: 80%;" class="example-full-width">
+             <mat-label>marque</mat-label>
+             <input type="text" (focus)="this.initMarqueAutoCompletOption()" matInput formControlName="marque"
+               [matAutocomplete]="marqueauto">
+             <mat-autocomplete #marqueauto="matAutocomplete" [displayWith]="displayFn">
+               @for (option of marquefilteredOptions | async; track option) {
+               <mat-option [value]="option">{{option}}</mat-option>
+               }
+             </mat-autocomplete>
+           </mat-form-field>
+         </div>
+
+         <div class="description">
+           <h4 style="width: 20%;padding-right: 10px;">
+             <img  src="\assets\icones\description.jpg"
+             style="width: 100%;max-width: 60px;;height: 100%;background-size: cover;" />
+           </h4>
+           <mat-form-field style="width: 80%;" class="example-full-width">
+             <mat-label>Description</mat-label>
+             <textarea matInput placeholder="Ex. It makes me feel..." formControlName="description"></textarea>
+           </mat-form-field>
+         </div>
+
+       </div>
+
+     </mat-grid-tile>
+
+     <mat-grid-tile>
+       <div class="deuxieme-donnee">
+         <div class="picture">
+           <h4 style="width: 30%;">
+          <!--<img style="height: 50px;width: 50px;background-size: cover;justify-self: right;" src="\assets\icones\picture.jpg">-->
+           </h4>
+           <div style="display: flex;border: 2px dotted black;">
+             <input #voitureinputfile type="file" style="width:0px ;height: 0px;">
+             <img #voitureimagefile src="\assets\icones\picture.jpg" style="width: 100%;min-width: 100px;;height: 100%;background-size: cover;" />
+           </div>
+         </div>
+
+         <div class="dimenssions">
+           <div style="width: 20%;display: grid;padding-top: 8px;">
+             <img style="height: 50px;width: 100%;background-size: cover;justify-self: right;" src="\assets\icones\dimensions.png">
+           </div>
+           <div style="display: flex;width: 60%;font-size: 80%;">
+             <div style="width: 50%;padding: 2%;display: flex;">
+               <div style="width: 70%;">
+                 <mat-form-field style="width: 100%;" class="example-full-width">
+                   <mat-label>hauteur</mat-label>
+                   <input style="text-align: right;" type="text" matInput formControlName="hauteur" [matAutocomplete]="hauteurauto">
+                   <mat-autocomplete #hauteurauto="matAutocomplete" [displayWith]="displayFn">
+                     @for (option of hauteurfilteredOptions | async; track option) {
+                     <mat-option [value]="option">{{option}}</mat-option>
+                     }
+                   </mat-autocomplete>
+                 </mat-form-field>
+               </div>
+               <div style="width:30%;font-weight: 900;font-size: 130%;padding: 3%;padding-top: 15%;">
+                 M<span style="font-size: 50%;font-weight: 100;">ettre</span>
+               </div>
+             </div>
+             <div style="width: 50%;padding: 2%;display: flex;">
+               <div style="width: 70%;">
+                 <mat-form-field style="width: 100%;" class="example-full-width">
+                   <mat-label>longueur</mat-label>
+                   <input style="text-align: right;" type="text" matInput formControlName="longueur" [matAutocomplete]="longueurauto">
+                   <mat-autocomplete #longueurauto="matAutocomplete" [displayWith]="displayFn">
+                     @for (option of longueurfilteredOptions | async; track option) {
+                     <mat-option [value]="option">{{option}}</mat-option>
+                     }
+                   </mat-autocomplete>
+                 </mat-form-field>
+               </div>
+               <div style="width:30%;font-weight: 900;font-size: 130%;padding: 3%;padding-top: 15%;">
+                   M<span style="font-size: 50%;font-weight: 100;">ettre</span>
+               </div>
+             </div>
+           </div>
+         </div>
+         <button type="submit" class="btnnew">Enregistrer</button>
+       </div>
+     </mat-grid-tile>
+
+   </mat-grid-list>
+ </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+</mat-dialog-actions>
+</div>
+ <!--fin form modification-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

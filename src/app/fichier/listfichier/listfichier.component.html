@@ -1,0 +1,125 @@
+<!-- formulaire de recherche-->
+<form class="col col-12  ">
+  <h6 style="color: #240a67;font-weight: 800;margin-bottom: 15px;font-size: 140%;">Rechercher</h6>
+
+  <!--recherche par propriete fichier lui meme-->
+  <div class="row">
+    <div class="col col-5">
+      <div class="label">Id</div>
+      <div class="input"><input style="width: 100%;height: 100%;" (keyup)="fichierS.FichierDeRecherche.id=fichierS.getHisValue($event);fichierS.recherche()"></div>
+   </div>
+   <div class="col col-5">
+        <div class="label">url</div>
+        <div class="input"><input type="text" style="width: 100%;height: 100%;" (keyup)="fichierS.FichierDeRecherche.url=fichierS.getHisValue($event);fichierS.recherche()"></div>
+   </div>
+   <!--pour non usersimple-->
+   <div class="col col-2" *ngIf="!conns.userisClientOuOuvrier()">
+    <span>type :</span>
+    <span>type :</span>
+    <select (change)="fichierS.FichierDeRechercheType=fichierS.getHisValue($event);fichierS.recherche()" class="label text-center" style="background-color: #063828;color: #d9dfea;">
+      <option [selected]="fichierS.FichierDeRechercheType==''" style="text-align: center;" [value]="''" >---TOUS---</option>
+      <option [selected]="fichierS.FichierDeRechercheType==type" [value]="type"  *ngFor="let type of fichierS.listTypeFichier">{{type}} </option>
+    </select>
+   </div>
+  <!--finpour non usersimple-->
+  <!--pour  usersimple-->
+  <div class="col col-2" *ngIf="conns.userisClientOuOuvrier()">
+    <span>type :</span>
+    <select (change)="fichierS.FichierDeRechercheType=fichierS.getHisValue($event);fichierS.recherche()" class="label text-center" style="background-color: #063828;color: #d9dfea;">
+      <option [selected]="fichierS.FichierDeRechercheType==''" style="text-align: center;" [value]="''" >---TOUS---</option>
+      <option [selected]="fichierS.FichierDeRechercheType==type" [value]="type"  *ngFor="let type of fichierS.listTypeFichierSimpleUtilisateur">{{type}} </option>
+    </select>
+   </div>
+  <!--finpour  usersimple-->
+  </div>
+  <!--fin recherche par propriete fichier lui meme-->
+
+<!--recherche par user du fichier NB: seulement pour non-usersimple -->
+  <div class="row" *ngIf="!conns.userisClientOuOuvrier()">
+    <div class="col col-2">
+      <div class="label">Id user</div>
+      <div class="input"><input style="width: 100%;height: 100%;" (keyup)="fichierS.UtilisateurDeRecherche.id=fichierS.getHisValue($event);fichierS.recherche()"></div>
+   </div>
+   <div class="col col-2">
+        <div class="label">nom user</div>
+        <div class="input"><input type="text" style="width: 100%;height: 100%;" (keyup)="fichierS.UtilisateurDeRecherche.nom=fichierS.getHisValue($event);fichierS.recherche()"></div>
+   </div>
+   <div class="col col-3">
+      <div class="label">prenom user</div>
+      <div class="input"><input type="text" style="width: 100%;height: 100%;" (keyup)="fichierS.UtilisateurDeRecherche.prenom=fichierS.getHisValue($event);fichierS.recherche()"></div>
+   </div>
+   <div class="col col-3">
+      <div class="label">email user</div>
+      <div class="input"><input style="width: 100%;height: 100%;" (keyup)="fichierS.UtilisateurDeRecherche.email=fichierS.getHisValue($event);fichierS.recherche()"></div>
+   </div>
+  <div class="col col-1 py-4">
+      <div class="btn  w-100" style="width: 100%;height: 100%;background-color: #240a67;color: aliceblue;">ok</div>
+  </div>
+  <div class="col col-1 py-4">
+    <input value="reset" type="reset" style="background-color: aquamarine;" class=" w-100 h-100" (click)="fichierS.initFichierDeRecherche();fichierS.recherche()">
+ </div>
+</div>
+<div class="row" *ngIf="!conns.userisClientOuOuvrier()">
+  <div class="col col-3">
+    <span>ROLE USER:</span>
+    <select (change)="fichierS.UtilisateurDeRechercheRole=fichierS.getHisValue($event);fichierS.recherche()" class="label text-center" style="background-color: #063828;color: #d9dfea;">
+      <option [selected]="fichierS.UtilisateurDeRechercheRole==''" [value]="''" style="text-align: center;" >---TOUS---</option>
+      <option [selected]="fichierS.UtilisateurDeRechercheRole==role" [value]="role"  *ngFor="let role of conns.listRolePossible">{{role}} </option>
+    </select>
+  </div>
+</div>
+<!--recherche par user du fichier -->
+</form>
+
+<!--fin formulaire de recherche-->
+<h2 style="color: rgb(25, 25, 55);padding: 10px;">LISTE DES FICHIERS <i class="fa fa-rotate-right" (click)="fichierS.refreshAllFichier()" style="font-size:80%;color:rgb(154, 153, 157)"></i></h2>
+<div style="width: 100%; overflow: auto;max-height: 400px;overflow-y: auto;padding: 10px;background-color: #626978; ">
+  <table class="table table-hover my-3 w-100" id="listefichier">
+      <thead >
+        <tr style="height: 80px;">
+          <th scope="col"  >id</th>
+          <th scope="col"  >USER</th>
+          <th scope="col" >&nbsp;</th>
+          <th scope="col"  >FICHIER</th>
+          <th scope="col"  >action</th>
+        </tr>
+      </thead>
+      <tbody>   <!--c'est tou-->
+        <tr  *ngFor="let f of this.fichierS.recherche(); index as i;" style="color: black;" >
+          <th scope="row">{{i}}</th>
+          <td>
+            <div *ngIf="f.personne" style="height: 100px;">
+             <div class="row">
+              <div class="col col-2">
+                <img [src]="UtilisateurS.normaliseImage(f.personne).picture" style="min-width: 50px;margin-top: 10px;height: 50px;border-radius: 50px 50px;">
+              </div>
+              <div class="col col-10">
+                <div style="font-weight: 700;color: #0e0e0e;">{{f.personne.id}}</div>
+                <div style="font-weight: 700;color: #666666;">{{f.personne.nom}} {{f.personne.prenom}}</div>
+                <div style="font-weight: 400;color: #787879;font-size: 95%;">{{f.personne.email}}</div>
+              </div>
+             </div>
+            </div>
+          </td>
+          <td> </td>
+          <td>
+            <div  style="height: 100px;" (click)="afficherFichier(f.url)">
+              <div class="row h-100">
+               <div class="col col-2 h-100 py-1" style="background-color: #5d766e;">
+                 <img *ngIf="f.type=='IDENTITY'||f.type=='PROFILE'" [src]="f.url" style="width: 99%;height:99%;">
+                 <embed *ngIf="f.type!='IDENTITY'" [src]="f.url" style="width: 99%;height: 99%;">
+               </div>
+               <div class="col col-10 h-100">
+                 <div style="font-weight: 700;color: #0e0e0e;">{{f.type}}</div>
+                 <div style="font-weight: 700;color: #666666;font-size: 90%;">{{f.url}}</div>
+               </div>
+              </div>
+             </div>
+          </td>
+          <td  style="width: 200px;">
+              <li (click)="this.supperimer(f.id)" class="fa fa-trash" style="font-size: 250%;color: #d11313;;background-color: #f8d8d8;"></li>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+</div>

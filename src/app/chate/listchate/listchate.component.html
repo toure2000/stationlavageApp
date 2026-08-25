@@ -1,0 +1,48 @@
+
+<div #divchat class="messages"  >
+  <div class="time" >
+    Today at 11:41
+  </div>
+
+  <div *ngFor="let message of this.chateS.getListMessageObject()" style="display: flex;">
+    <div *ngIf="chateS.conditionAffichageMessage(message)&&message.type!='MESSAGE_RENDEVOUS'"
+      class="{{getClasse(message)}} messagetext" style="margin-right: 3px;word-wrap: break-word;">
+      {{message.message}}
+    </div>
+
+    <i *ngIf="chateS.conditionAffichageMessage(message)&&(message.iduser==conns.getCurrentUser().id)&&this.chateS.isMessageVueByUserTo(message)"
+      class="fa fa-chevron-down" style="
+   color: rgb(2, 105, 24);
+   width: 15px;
+   height: 15px;
+   border-radius: 15px;
+   font-size: 110%;
+   background-color: rgb(114, 154, 126);
+   transform: translate(-5px,18px);
+   " aria-hidden="true"></i>
+    <i *ngIf="!this.chateS.isMessageSendToUserTo(message)&&chateS.conditionAffichageMessage(message)&&(message.iduser==conns.getCurrentUser().id)&&!this.chateS.isMessageVueByUserTo(message)"
+      class="fa fa-chevron-down" style="
+   color: rgb(81, 82, 82);
+   width: 15px;
+   height: 15px;
+   border-radius: 15px;
+   font-size: 110%;
+   transform: translate(-5px,18px);
+   background-color: rgb(234, 234, 234);" aria-hidden="true"></i>
+    <i *ngIf="this.chateS.isMessageSendToUserTo(message)&&chateS.conditionAffichageMessage(message)&&(message.iduser==conns.getCurrentUser().id)&&!this.chateS.isMessageVueByUserTo(message)"
+      class="fa fa-chevron-down" style="
+   color: rgb(52, 54, 86);
+   width: 15px;
+   height: 15px;
+   border-radius: 15px;
+   font-size: 110%;
+   transform: translate(-5px,18px);
+   background-color: rgb(193, 188, 234);" aria-hidden="true"></i>
+  </div>
+
+  <div class="message stark" *ngIf="chateS.isUserEncoureDeMessageAvecMoi(chateS.getListIdTo()[0])">
+    <div class="typing typing-1"></div>
+    <div class="typing typing-2"></div>
+    <div class="typing typing-3"></div>
+  </div>
+</div>

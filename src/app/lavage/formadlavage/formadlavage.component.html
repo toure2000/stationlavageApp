@@ -1,0 +1,322 @@
+
+
+@if(userisadmin){
+  <h3 style="text-align: center;box-shadow: 0px 0px 10px #000;padding: 1%;">Ajouter Lavage</h3>
+<form [formGroup]="this.FormadlavageS.form" (ngSubmit)="this.FormadlavageS.submitLavageForm()">
+  <mat-tab-group #tabgroup>
+    <mat-tab  label="Données">
+
+  <mat-grid-list #gridliste cols="2" rowHeight="200px">
+        <mat-grid-tile>
+
+          <div class="donnee-obligatoire">
+            <div class="typelavage">
+              <h4 style="width: 30%;">Type lavage</h4>
+              <mat-form-field style="width: 70%;">
+                <mat-label>Type lavage</mat-label>
+                <mat-select formControlName="type_lavage">
+                  <mat-option>None</mat-option>
+                  @for (state of listTypeLavage| async; track state) {
+                  <mat-option [value]="state">{{state.type}} ({{state.prix.montant}}-{{state.prix.unite}} )</mat-option>
+                  }
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="typevoiture">
+              <h4 style="width: 30%;">Type voiture</h4>
+              <mat-form-field style="width: 70%;">
+                <mat-label>Type lavage</mat-label>
+                <mat-select formControlName="typeVoiture">
+                  <mat-option>None</mat-option>
+                  @for (option of (listTypeVoiture) | async; track option) {
+                  <mat-option [value]="option">
+                    <div style="display: flex;">
+                      <img style="width: 25px;height: 25px;background-size: cover;" [src]="ConnectionS.GlobaleS.normaliseImage(option.picture)"/>
+                      <div style="padding-left: 5px;padding-top: 2px;">{{option.marque}}</div>
+                    </div>
+                  </mat-option>
+                  }
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+          </div>
+
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+          <div class="donnee-non-obligatoire">
+            <div class="list-service">
+              <h4 style="width: 30%;">List service</h4>
+              <mat-form-field>
+                <mat-label>Toppings</mat-label>
+                <mat-select formControlName="list_Service" multiple>
+                  @for (topping of toppingList; track topping) {
+                    <mat-option [value]="topping">{{topping}}</mat-option>
+                  }
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="list-materiel">
+              <h4 style="width: 30%;">List Materiel</h4>
+              <mat-form-field>
+                <mat-label>Toppings</mat-label>
+                <mat-select formControlName="list_ouvrier" multiple>
+                  @for (topping of toppingList; track topping) {
+                    <mat-option [value]="topping">{{topping}}</mat-option>
+                  }
+                </mat-select>
+              </mat-form-field>
+            </div>
+         <!--   <div (click)="suivant()" class="btnnew">suivant</div> -->
+          </div>
+        </mat-grid-tile>
+
+      </mat-grid-list>
+      <div style="width: 100%;display: grid;">
+        <span type="submit" style="justify-self: center;" class="btnnew" (click)="suivant()">Suivant</span>
+      </div>
+
+    </mat-tab>
+    <mat-tab label="Personnes">
+
+      <mat-grid-list #gridliste2 cols="1" rowHeight="200px">
+        <mat-grid-tile>
+
+      <div class="donnee-personnes">
+        <div class="clients">
+          <h4 style="width: 30%;">Client</h4>
+          <mat-form-field class="example-full-width">
+            <mat-label>Client</mat-label>
+              <input #inputclient type="text" matInput  [matAutocomplete]="autoclient">
+              <mat-autocomplete #autoclient="matAutocomplete" [displayWith]="displayFnClient()">
+                @for (option of listeclient | async; track option) {
+                  <mat-option [value]="option">{{option.nom+" "+option.prenom}}</mat-option>
+              }
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+
+        <div class="ouvriers">
+          <h4 style="width: 30%;">Ouvrier</h4>
+          <mat-form-field class="example-full-width">
+            <mat-label>Ouvrier</mat-label>
+            <input #inputouvrier type="text" matInput  [matAutocomplete]="autoouvrier">
+            <mat-autocomplete #autoouvrier="matAutocomplete" [displayWith]="displayFnOuvrier()">
+              @for (option of listeouvrier | async; track option) {
+                <mat-option [value]="option">{{option.nom+" "+option.prenom}}</mat-option>
+              }
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+        <button type="submit" class="btnnew">enregistrer</button>
+      </div>
+
+      </mat-grid-tile>
+      </mat-grid-list>
+
+    </mat-tab>
+  </mat-tab-group>
+</form>
+
+}
+
+
+@if(userisclient){
+  <h3 style="text-align: center;box-shadow: 0px 0px 10px #000;padding: 1%;">Ajouter Lavage</h3>
+<form [formGroup]="this.FormadlavageS.form" (ngSubmit)="this.FormadlavageS.submitLavageForm()">
+  <mat-tab-group #tabgroup>
+    <mat-tab  label="Données">
+
+  <mat-grid-list #gridliste cols="2" rowHeight="200px">
+        <mat-grid-tile>
+
+          <div class="donnee-obligatoire">
+            <div class="typelavage">
+              <h4 style="width: 30%;">Type lavage</h4>
+              <mat-form-field style="width: 70%;">
+                <mat-label>Type lavage</mat-label>
+                <mat-select formControlName="type_lavage">
+                  <mat-option>None</mat-option>
+                  @for (state of listTypeLavage| async; track state) {
+                  <mat-option [value]="state">{{state.type}} ({{state.prix.montant}}-{{state.prix.unite}} )</mat-option>
+                  }
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="typevoiture">
+              <h4 style="width: 30%;">Type voiture</h4>
+              <mat-form-field style="width: 70%;">
+                <mat-label>Type lavage</mat-label>
+                <mat-select formControlName="typeVoiture">
+                  <mat-option>None</mat-option>
+                  @for (option of (listTypeVoiture) | async; track option) {
+                  <mat-option [value]="option">
+                    <div style="display: flex;">
+                      <img style="width: 25px;height: 25px;background-size: cover;" [src]="ConnectionS.GlobaleS.normaliseImage(option.picture)"/>
+                      <div style="padding-left: 5px;padding-top: 2px;">{{option.marque}}</div>
+                    </div>
+                  </mat-option>
+                  }
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+          </div>
+
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+          <div class="donnee-non-obligatoire">
+            <div class="list-service">
+              <h4 style="width: 30%;">List service</h4>
+              <mat-form-field>
+                <mat-label>Toppings</mat-label>
+                <mat-select formControlName="list_Service" multiple>
+                  @for (topping of toppingList; track topping) {
+                    <mat-option [value]="topping">{{topping}}</mat-option>
+                  }
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="list-materiel">
+              <h4 style="width: 30%;">List Materiel</h4>
+              <mat-form-field>
+                <mat-label>Toppings</mat-label>
+                <mat-select formControlName="list_ouvrier" multiple>
+                  @for (topping of toppingList; track topping) {
+                    <mat-option [value]="topping">{{topping}}</mat-option>
+                  }
+                </mat-select>
+              </mat-form-field>
+            </div>
+         <!--   <div (click)="suivant()" class="btnnew">suivant</div> -->
+          </div>
+        </mat-grid-tile>
+
+      </mat-grid-list>
+      <div style="width: 100%;display: grid;">
+        <button type="submit" style="justify-self: center;" class="btnnew">enregistrer</button>
+      </div>
+
+    </mat-tab>
+
+  </mat-tab-group>
+</form>
+
+}
+
+@if(userisouvrier){
+  <h3 style="text-align: center;box-shadow: 0px 0px 10px #000;padding: 1%;">Ajouter Lavage</h3>
+<form [formGroup]="this.FormadlavageS.form" (ngSubmit)="this.FormadlavageS.submitLavageForm()">
+  <mat-tab-group #tabgroup>
+    <mat-tab  label="Données">
+
+  <mat-grid-list #gridliste cols="2" rowHeight="200px">
+        <mat-grid-tile>
+
+          <div class="donnee-obligatoire">
+            <div class="typelavage">
+              <h4 style="width: 30%;">Type lavage</h4>
+              <mat-form-field style="width: 70%;">
+                <mat-label>Type lavage</mat-label>
+                <mat-select formControlName="type_lavage">
+                  <mat-option>None</mat-option>
+                  @for (state of listTypeLavage| async; track state) {
+                  <mat-option [value]="state">{{state.type}} ({{state.prix.montant}}-{{state.prix.unite}} )</mat-option>
+                  }
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="typevoiture">
+              <h4 style="width: 30%;">Type voiture</h4>
+              <mat-form-field style="width: 70%;">
+                <mat-label>Type lavage</mat-label>
+                <mat-select formControlName="typeVoiture">
+                  <mat-option>None</mat-option>
+                  @for (option of (listTypeVoiture) | async; track option) {
+                  <mat-option [value]="option">
+                    <div style="display: flex;">
+                      <img style="width: 25px;height: 25px;background-size: cover;" [src]="ConnectionS.GlobaleS.normaliseImage(option.picture)"/>
+                      <div style="padding-left: 5px;padding-top: 2px;">{{option.marque}}</div>
+                    </div>
+                  </mat-option>
+                  }
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+          </div>
+
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+          <div class="donnee-non-obligatoire">
+            <div class="list-service">
+              <h4 style="width: 30%;">List service</h4>
+              <mat-form-field>
+                <mat-label>Toppings</mat-label>
+                <mat-select formControlName="list_Service" multiple>
+                  @for (topping of toppingList; track topping) {
+                    <mat-option [value]="topping">{{topping}}</mat-option>
+                  }
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="list-materiel">
+              <h4 style="width: 30%;">List Materiel</h4>
+              <mat-form-field>
+                <mat-label>Toppings</mat-label>
+                <mat-select formControlName="list_ouvrier" multiple>
+                  @for (topping of toppingList; track topping) {
+                    <mat-option [value]="topping">{{topping}}</mat-option>
+                  }
+                </mat-select>
+              </mat-form-field>
+            </div>
+         <!--   <div (click)="suivant()" class="btnnew">suivant</div> -->
+          </div>
+        </mat-grid-tile>
+
+      </mat-grid-list>
+      <div style="width: 100%;display: grid;">
+        <span type="submit" style="justify-self: center;" class="btnnew" (click)="suivant()">Suivant</span>
+      </div>
+
+    </mat-tab>
+    <mat-tab label="Personnes">
+
+      <mat-grid-list #gridliste2 cols="1" rowHeight="200px">
+        <mat-grid-tile>
+
+      <div class="donnee-personnes">
+        <div class="clients">
+          <h4 style="width: 30%;">Client</h4>
+          <mat-form-field class="example-full-width">
+            <mat-label>Client</mat-label>
+              <input #inputclient type="text" matInput  [matAutocomplete]="autoclient">
+              <mat-autocomplete #autoclient="matAutocomplete" [displayWith]="displayFnClient()">
+                @for (option of listeclient | async; track option) {
+                  <mat-option [value]="option">{{option.nom+" "+option.prenom}}</mat-option>
+              }
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+
+        <button type="submit" class="btnnew">enregistrer</button>
+      </div>
+
+      </mat-grid-tile>
+      </mat-grid-list>
+
+    </mat-tab>
+  </mat-tab-group>
+</form>
+
+}

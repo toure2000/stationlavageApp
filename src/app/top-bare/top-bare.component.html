@@ -1,0 +1,194 @@
+<div class="nav" (mouseover)="surtopbar=true" (mouseout)="surtopbar=false">
+  <div class="left" style="width: 10%;">
+    <i (click)="togglesidebar()"  (mouseover)="sursidbar=true" (mouseout)="sursidbar=false" class="fa fa-bars"
+      aria-hidden="true"></i>
+  </div>
+  <div class="milieu" style="width: 80%;">
+    <i (click)="route.navigateByUrl('accueille')" class="fa fa-home" aria-hidden="true" style=""></i>
+    <!--<i class="fa fa-cog" aria-hidden="true"></i>-->
+  </div>
+  <div class="right" style="width: 10%;">
+    <app-notification />
+    <img style="width: 35px;background-color: #FFF;height: 35px;margin-left: 15px;margin-right: 15px;box-shadow: 0px 0px 5px #FFF;border-radius: 100%;background-size: cover;" (click)="toggleprofile()" [src]="getImageUser(conns.getCurrentUser())">
+
+    <div class="divprofile" *ngIf="etatprofile=='1'" >
+      <div class="parentinfoprofile">
+        <div class="infoprofile">
+           <div style="width: 30px;height: 30px;margin-top: 10px;margin-left: 10px;">
+               <img style="width: 100%;height: 100%;border-radius: 100%;background-size: cover;" [src]="getImageUser(conns.getCurrentUser())">
+           </div>
+          <div style="height: 30px;margin-top: 10px;margin-left: 10px;padding-top: 3px;color: black;font-weight: 800;">
+            {{conns.getCurrentUser().nom}} {{conns.getCurrentUser().prenom}}
+           </div>
+        </div>
+        <div style="border-top: 2px solid #9d9b9b;width: 80%;margin-left: 10%;height: 0px;margin-top: 0px;margin-bottom: 0px;"></div>
+        <div class="lienprofile">
+           <h4 style="color: rgb(70, 70, 103);text-align: left;padding-left: 10%;padding-top: 4px;">Acceder au profile</h4>
+        </div>
+      </div>
+
+       <div class="actionsprofile" (click)="deconnection()" >
+         <div style="width: 40px;">
+          <i style="color: black;" class="fa fa-sign-out" aria-hidden="true"></i>
+         </div>
+         <div style="color: rgb(70, 70, 103);text-align: left;padding-left: 10%;padding-top: 6px;">
+          Se deconnecter
+         </div>
+       </div>
+
+    </div>
+
+  </div>
+</div>
+
+
+<div #sidbar class="sidbar" (mouseover)="sursidbar=true" (mouseout)="sursidbar=false">
+
+    <div class="sidbarelement" (click)="route.navigateByUrl('LavageComponent')">
+      <div class="sidbardivimage">
+        <img class="sidbarimage" src="/assets/icones/lavage.png">
+      </div>
+      <div class="sidbartext">
+        Lavage
+      </div>
+    </div>
+
+    @if(conns.userisAdmin()){
+    <div class="sidbarelement" (click)="route.navigateByUrl('TypeVoitureComponent')">
+      <div class="sidbardivimage">
+        <img class="sidbarimage" src="/assets/icones/marque.png">
+      </div>
+      <div class="sidbartext">
+        Type voiture
+      </div>
+    </div>
+     }
+
+    <div class="sidbarelement" (click)="route.navigateByUrl('TypeLavageComponent')">
+      <div class="sidbardivimage">
+        <img class="sidbarimage" src="/assets/icones/type_lavage.png">
+      </div>
+      <div class="sidbartext">
+        Type lavage
+      </div>
+    </div>
+
+  @if(conns.userisAdmin()){
+    <div class="sidbarelement" (click)="route.navigateByUrl('UtilisateurComponent')">
+      <div class="sidbardivimage">
+        <img class="sidbarimage" src="/assets/icones/users.png">
+      </div>
+      <div class="sidbartext">
+        Utilisateurs
+      </div>
+    </div>
+   }
+
+
+
+
+
+
+
+
+   <!--
+   <div class="nav">
+  <div class="left" style="width: 10%;">
+    <i (click)="togglesidebar()" (mouseover)="sursidbar=true" (mouseout)="sursidbar=false" class="fa fa-bars"
+      aria-hidden="true"></i>
+  </div>
+  <div class="milieu" style="width: 80%;">
+    <i (click)="route.navigateByUrl('accueille')" class="fa fa-home" aria-hidden="true" style=""></i>
+  </div>
+  <div class="right" style="width: 10%;">
+    <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+  </div>
+</div>
+
+
+
+
+@if(conns.userisAdmin()){
+  <div #sidbar class="sidbar" (mouseover)="sursidbar=true" (mouseout)="sursidbar=false">
+    <div class="sidbarelement" (click)="route.navigateByUrl('LavageComponent')">
+      <div class="sidbardivimage">
+        <img class="sidbarimage" src="/assets/icones/lavage.png">
+      </div>
+      <div class="sidbartext">
+        Lavage
+      </div>
+    </div>
+    <div class="sidbarelement" (click)="route.navigateByUrl('TypeVoitureComponent')">
+      <div class="sidbardivimage">
+        <img class="sidbarimage" src="/assets/icones/marque.png">
+      </div>
+      <div class="sidbartext">
+        Type voiture
+      </div>
+    </div>
+    <div class="sidbarelement" (click)="route.navigateByUrl('TypeLavageComponent')">
+      <div class="sidbardivimage">
+        <img class="sidbarimage" src="/assets/icones/type_lavage.png">
+      </div>
+      <div class="sidbartext">
+        Type lavage
+      </div>
+    </div>
+    <div class="sidbarelement" (click)="route.navigateByUrl('UtilisateurComponent')">
+      <div class="sidbardivimage">
+        <img class="sidbarimage" src="/assets/icones/users.png">
+      </div>
+      <div class="sidbartext">
+        Utilisateurs
+      </div>
+    </div>
+  </div>
+
+}
+
+
+@if(conns.userisClient()){
+  <div #sidbar class="sidbar" (mouseover)="sursidbar=true" (mouseout)="sursidbar=false">
+    <div class="sidbarelement" (click)="route.navigateByUrl('LavageComponent')">
+      <div class="sidbardivimage">
+        <img class="sidbarimage" src="/assets/icones/lavage.png">
+      </div>
+      <div class="sidbartext">
+        Lavage
+      </div>
+    </div>
+    <div class="sidbarelement" (click)="route.navigateByUrl('TypeLavageComponent')">
+      <div class="sidbardivimage">
+        <img class="sidbarimage" src="/assets/icones/type_lavage.png">
+      </div>
+      <div class="sidbartext">
+        Type lavage
+      </div>
+    </div>
+  </div>
+
+}
+
+
+@if(conns.userisOuvrier()){
+  <div #sidbar class="sidbar" (mouseover)="sursidbar=true" (mouseout)="sursidbar=false">
+    <div class="sidbarelement" (click)="route.navigateByUrl('LavageComponent')">
+      <div class="sidbardivimage">
+        <img class="sidbarimage" src="/assets/icones/lavage.png">
+      </div>
+      <div class="sidbartext">
+        Lavage
+      </div>
+    </div>
+    <div class="sidbarelement" (click)="route.navigateByUrl('TypeLavageComponent')">
+      <div class="sidbardivimage">
+        <img class="sidbarimage" src="/assets/icones/type_lavage.png">
+      </div>
+      <div class="sidbartext">
+        Type lavage
+      </div>
+    </div>
+  </div>
+}
+
+   -->

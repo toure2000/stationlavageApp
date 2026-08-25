@@ -1,0 +1,182 @@
+<!--<!doctype html>
+<html lang="en">
+  <head>
+  	<title>Table 05</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	</head>
+	<body style="width: 90%;margin-left: 5%;" >
+
+    !-- formulaire de recherche--
+
+    <form class="col col-12  ">
+      <h6 style="color: #240a67;font-weight: 800;margin-bottom: 15px;font-size: 140%;">Rechercher</h6>
+      <div class="row">
+        <div class="col col-2">
+          <div class="label">Id</div>
+          <div class="input"><input style="width: 100%;height: 100%;" (keyup)="UtilisateurS.UtilisateurDeRecherche.id=UtilisateurS.getHisValue($event);UtilisateurS.recherche()"></div>
+       </div>
+       <div class="col col-2">
+            <div class="label">nom</div>
+            <div class="input"><input type="text" style="width: 100%;height: 100%;" (keyup)="UtilisateurS.UtilisateurDeRecherche.nom=UtilisateurS.getHisValue($event);UtilisateurS.recherche()"></div>
+       </div>
+       <div class="col col-3">
+          <div class="label">prenom</div>
+          <div class="input"><input type="text" style="width: 100%;height: 100%;" (keyup)="UtilisateurS.UtilisateurDeRecherche.prenom=UtilisateurS.getHisValue($event);UtilisateurS.recherche()"></div>
+       </div>
+       <div class="col col-3">
+          <div class="label">email</div>
+          <div class="input"><input style="width: 100%;height: 100%;" (keyup)="UtilisateurS.UtilisateurDeRecherche.email=UtilisateurS.getHisValue($event);UtilisateurS.recherche()"></div>
+       </div>
+      <div class="col col-1 py-4">
+          <div class="btn  w-100" style="width: 100%;height: 100%;background-color: #240a67;color: aliceblue;">ok</div>
+      </div>
+      <div class="col col-1 py-4">
+        <input value="reset" type="reset" style="background-color: aquamarine;" class=" w-100 h-100" (click)="UtilisateurS.initUtilisateurDeRecherche();UtilisateurS.recherche()">
+    </div>
+    </div>
+    <div class="row">
+      <div class="col col-3">
+        <span>ROLE :</span>
+        <select (change)="UtilisateurS.UtilisateurDeRechercheRole=UtilisateurS.getHisValue($event);UtilisateurS.recherche()" class="label text-center" style="background-color: #063828;color: #d9dfea;">
+          <option style="text-align: center;" [value]="''">---TOUS---</option>
+          <option
+           *ngFor="let role of conns.listRolePossible"
+            [value]="role">{{role}} </option>
+        </select>
+      </div>
+    </div>
+    </form >
+    !--fin formulaire de recherche--
+
+  <h4> LISTE DES UtilisateurS</h4>
+	<div style="width:100% ;height: 90%;max-height: 550px;overflow-y: auto;padding: 1%;background-color: #d9dfea;">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="table-wrap">
+          <table class="table table-hover table-responsive-xl">
+            <thead>
+              <tr>
+                !--<th>&nbsp;</th>--
+                <th>Email</th>
+                <th>Username</th>
+                <th>Role</th>
+                <th>Status</th>
+                <th>&nbsp;</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="alert" role="alert" *ngFor="let Utilisateur of this.UtilisateurS.recherche()" (click)="UtilisateurS.setUtilisateur(Utilisateur)">
+                !--<td>
+                  <label class="checkbox-wrap checkbox-primary">
+                    <input type="checkbox" checked>
+                    <span class="checkmark"></span>
+                  </label>
+                </td>--
+                <td class="d-flex align-items-center">
+                  <div class="img" style="background-image: url({{Utilisateur.picture}});"></div>
+                  <div class="pl-3 email">
+                    <span>{{Utilisateur.id}}</span>
+                    <span>{{Utilisateur.email}}</span>
+                    <span>{{Utilisateur.datecreation}}</span>
+                  </div>
+                </td>
+                <td>{{Utilisateur.nom}} {{Utilisateur.prenom}}</td>
+                <td>{{Utilisateur.role}}</td>
+                <td class="status" ><span class="waiting" >Active</span></td>
+                <td>
+                  <i *ngIf="!conns.userisAdmin(Utilisateur)" (click)="afficherModif(Utilisateur)" class="fa fa-edit" style="font-size: 200%;margin-right: 15px;color: #083595;;background-color: #89a7e7;"></i>
+                  <i *ngIf="!conns.userisAdmin(Utilisateur)" (click)="UtilisateurS.removeUtilisateur(Utilisateur)" class="fa fa-trash" style="font-size: 200%;color: #d11313;;background-color: #f8d8d8;"></i>
+                  !--<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true"><i class="fa fa-close"></i></span>
+                  </button>--
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div #divoperationUtilisateur class="divoperationUtilisateur"  style="display: none;" >
+    <div  class="divoperationUtilisateur" (click)="fermerModif()" style="z-index: 9;position: fixed;left: 0px;right: 0px;top: 0px;bottom: 0px;background-color: rgb(78, 76, 76);opacity: 0.7;"></div>
+    <div style="z-index: 999;" [style]="conns.GlobaleS.getStylelaceCentre(700,700,'rgb(36, 36, 88)')">
+      <app-formadutilisateur></app-formadutilisateur>
+    </div>
+  </div>
+	</body>
+</html>
+
+-->
+
+
+
+
+
+<h3 style="text-align: center;box-shadow: 0px 0px 10px #000;padding: 1%;">Liste des types de Lavage</h3>
+<div class="mat-elevation-z8" style="overflow-x: auto;">
+  <table mat-table [dataSource]="UtilisateurS.dataSource">
+
+    <!-- Position Column
+    <ng-container matColumnDef="position">
+      <th mat-header-cell *matHeaderCellDef> No. </th>
+      <td mat-cell *matCellDef="let element"> {{ toUSER(element).marque}} </td>
+    </ng-container>-->
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> User </th>
+      <td mat-cell *matCellDef="let element" >
+          <div style="display: flex;">
+            <div style="padding: 5px;">
+               <img [src]="toUSER(element).picture||'/assets/icones/user.png'" style="width: 75px;height: 75px;background-size: cover;border-radius: 10px;background-position: center;">
+            </div>
+            <div style="padding-top: 20px;padding-left: 2%;">
+              {{ toUSER(element).nom }}
+              <span
+              style="display: block;font-size: 50%;">{{ toUSER(element).nom[0].toUpperCase()}}. {{toUSER(element).prenom }} ({{toUSER(element).email }})</span>
+               <div style="font-size: 60%;">
+                <b>{{ toUSER(element).role}}</b>
+               </div>
+            </div>
+          </div>
+      </td>
+    </ng-container>
+
+    <!-- Weight Column
+    <ng-container matColumnDef="weight">
+      <th mat-header-cell *matHeaderCellDef> Role </th>
+      <td mat-cell *matCellDef="let element"> </td>
+    </ng-container>
+  -->
+    <!-- Symbol Column
+    <ng-container matColumnDef="symbol">
+      <th mat-header-cell *matHeaderCellDef> Prix </th>
+      <td mat-cell *matCellDef="let element">{{ toUSER(element).prix.montant}} ({{ toUSER(element).prix.unite}})</td>
+    </ng-container>
+-->
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Actions </th>
+      <td mat-cell *matCellDef="let element">
+
+        <div style="min-width: 100px;">
+          <i (click)="this.FormadUtilisateurS.initFormModif(toUSER(element))" class="fa fa-edit"
+            style="font-size: 200%;margin-right: 15px;color: #083595;background-color: #89a7e7;"></i>
+          <i (click)="this.UtilisateurS.removeUtilisateur(toUSER(element))" class="fa fa-trash"
+            style="font-size: 200%;color: #d11313;background-color: #f8d8d8;"></i>
+        </div>
+
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
+  </mat-paginator>
+</div>
+

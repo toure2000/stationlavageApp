@@ -1,0 +1,21 @@
+<img *ngIf="FormfichierS.file" [src]="FormfichierS.urllocale" style="width: 100px;height: 50px;background-size: cover;">
+<form  (ngSubmit)="FormfichierS.ngSubmit()">
+    <div class="form-group">
+      <label for="exampleInputPassword1">joindre un fichier</label>
+      <input type="file" (change)="FormfichierS.fileChange($event)" class="form-control" id="exampleInputfile" placeholder="fichier">
+    </div>
+    <div class="row">
+      <select class="col col-3" (change)="this.FormfichierS.type=fichierS.getHisValue($event)">
+        <option  *ngFor="let typef of fichierS.listTypeFichier" [selected]="typef==this.FormfichierS.type" [value]="typef" >{{typef}}</option>
+      </select>
+    </div>
+   <!-- <div class="row" *ngIf="conns.userisPatientOUSimpleUtilisateur()">
+      <select class="col col-3" (change)="this.FormfichierS.type=fichierS.getHisValue($event)">
+        <option  *ngFor="let typef of fichierS.listTypeFichierSimpleUtilisateur" [selected]="typef==this.FormfichierS.type" [value]="typef" >{{typef}}</option>
+      </select>
+    </div>-->
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+
+
